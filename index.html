@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2024-05-15 Should Python adopt CalVer?</title>
+    <link rel="stylesheet" href="base.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="web.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="black.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <h1>2024-05-15 Should Python adopt CalVer?</h1>
+
+    <p>
+      Here's my talk from the
+      <a href="https://us.pycon.org/2024/events/language-summit/">Language Summit</a>
+      at PyCon US 2024.
+    </p>
+
+    <div class="slides">
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.001.jpg" alt="Image of slide number 1" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            Hello, my name is <a href="https://github.com/hugovk">Hugo van Kemenade</a>,
+            I’ve been a core dev for about two years, and I’m the
+            <a
+              href="https://discuss.python.org/t/python-3-14-3-15-release-manager/51812"
+              >next release manager</a
+            >.
+          </p>
+
+          <p>
+            I work for <a href="https://deadsetbit.com/">Dead Set Bit</a> in Helsinki
+            and sometimes cycle on the sea.
+          </p>
+
+          <p>
+            Technically, this is the first talk of PyCon, and it’s also my first talk at
+            PyCon!
+          </p>
+
+          <p>I’m going to propose we adopt Calendar Versioning.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.002.jpg" alt="Image of slide number 2" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            But first,
+            <a
+              href="https://docs.python.org/3/faq/general.html#how-does-the-python-version-numbering-scheme-work"
+              >here’s the current scheme</a
+            >. It’s major dot minor dot micro.
+          </p>
+
+          <p>Major is bumped for very big changes, like 2-to-3.</p>
+
+          <p>Minor for less big changes, like the 3.13 feature release.</p>
+
+          <p>And micro or patch is bumped for bug fixes.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.003.jpg" alt="Image of slide number 3" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            But look at this, it suggests the major version is only incremented for
+            earth-shattering changes! Let’s come back to this.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.004.jpg" alt="Image of slide number 4" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            <a href="https://semver.org/">Semantic Versioning</a> is a popular scheme
+            which aims to communicate the <i>intent</i> of a release:
+          </p>
+
+          <p>A major bump means you make breaking API changes.</p>
+
+          <p>
+            Minor means you add functionality without <i>intentional</i> breaking
+            changes.
+          </p>
+
+          <p>And patch is for bug fixes.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.005.jpg" alt="Image of slide number 5" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            Every Python feature release, like 3.8 or 3.13, can and does contain
+            breaking changes.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.006.jpg" alt="Image of slide number 6" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            People often assume Python follows semantic versioning and complain about
+            breaking changes in feature releases.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.007.jpg" alt="Image of slide number 7" />
+        </div>
+        <div class="slide-notes">
+          <p>But Python’s scheme predates SemVer by at least 15 years:</p>
+
+          <p>The SemVer spec was introduced in 2009.</p>
+
+          <p>
+            The Python scheme was
+            <a
+              href="https://github.com/hugovk/cpython/commit/95f61a7ef067dbcabccc9b45ee885b0d55922c5f"
+              >added to source control in 1994</a
+            >
+            for the 1.0 release.
+          </p>
+
+          <p>It was 30 years old in January!</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.008.jpg" alt="Image of slide number 8" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            Here’s someone who thought
+            <a href="https://peps.python.org/pep-0594/">removing the dead batteries</a>
+            should wait for 4.0.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.009.jpg" alt="Image of slide number 9" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            If Python adopted SemVer, we’d basically get a new major bump every year
+            when we remove deprecations.
+          </p>
+
+          <p>
+            Some projects have adopted another versioning scheme based on the calendar.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.010.jpg" alt="Image of slide number 10" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            With <a href="https://calver.org/">Calendar Versioning</a>, you include some
+            element of the date in the version number.
+          </p>
+
+          <p>Here’s some examples:</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.011.jpg" alt="Image of slide number 11" />
+        </div>
+        <div class="slide-notes">
+          <p>Ubuntu and Black use the year and month.</p>
+
+          <p>For example, Ubuntu 24.04 just came out last month, in April 2024.</p>
+
+          <p>pip and PyCharm use only the year.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.012.jpg" alt="Image of slide number 12" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            And here are some programming languages, all using some form of the year.
+          </p>
+
+          <p>Either two or four digits.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.013.jpg" alt="Image of slide number 13" />
+        </div>
+        <div class="slide-notes">
+          <p>Since 2019, we’ve made a release each year.</p>
+
+          <p>This is sort of calendar-based, it’s just that it’s offset by 11 years.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.014.jpg" alt="Image of slide number 14" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            The simplest CalVer option would be to stick with major version 3, and put
+            the year in the minor version.
+          </p>
+
+          <p>For example, 3.26 will be released in 2026.</p>
+
+          <p>It makes it obvious when a release came out.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.015.jpg" alt="Image of slide number 15" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            Right now, it’s a little tricky to work out when a release is end-of-life.
+          </p>
+
+          <p>
+            First you have to look up when it was initially released, then add 5 years.
+          </p>
+
+          <p>
+            But if the initial release date is right there in the version, it’s much
+            easier.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.016.jpg" alt="Image of slide number 16" />
+        </div>
+        <div class="slide-notes">
+          <p>I don’t think there’s much appetite for version 4.</p>
+
+          <p>It’s become a bit of a taboo.</p>
+
+          <p>
+            We
+            <a href="https://twitter.com/gvanrossum/status/1306082472443084801"
+              >don’t want to repeat 2-to-3</a
+            >, and 4 has a lot of expectations by now.
+          </p>
+
+          <p>
+            We
+            <a
+              href="https://www.techrepublic.com/article/programming-languages-why-python-4-0-will-probably-never-arrive-according-to-its-creator/"
+              >don’t want</a
+            >
+            <a href="https://www.youtube.com/watch?v=aYbNh3NS7jA"
+              >“earth-shattering changes”</a
+            >.
+          </p>
+
+          <p>
+            Perhaps 4 could be reserved for something big like removing the GIL, but the
+            Steering Council made it clear the rollout must be gradual.
+          </p>
+
+          <p>
+            Will we
+            <a
+              href="https://discuss.python.org/t/python-3-13-alpha-1-contains-breaking-changes-whats-the-plan/37490/10"
+              >stick on version 3 forever?</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.017.jpg" alt="Image of slide number 17" />
+        </div>
+        <div class="slide-notes">
+          <p>Another option is to put the year in the major version.</p>
+
+          <p>For example, 26.0 will be released in 2026.</p>
+
+          <p>This means we can take a nice big leap over all that 4.0 baggage!</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.018.jpg" alt="Image of slide number 18" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            Or we could also include the release month as the minor version, like Ubuntu
+            and Black.
+          </p>
+
+          <p>For example, 26.10 will be released in October 2026.</p>
+
+          <p>
+            This makes it clear <i>when</i> in the year it was released, and also
+            <i>when</i> in the year it will reach end-of-life.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.019.jpg" alt="Image of slide number 19" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            With all these options, we’d keep compatibility with the familiar three-part
+            version.
+          </p>
+
+          <p>
+            Like now, only the micro would be updated for bug and security releases.
+          </p>
+
+          <p>There’d be no change to the major and minor.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.020.jpg" alt="Image of slide number 20" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            Many other things would not change, like the annual cadence, the
+            pre-releases, or the support durations.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.021.jpg" alt="Image of slide number 21" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            To get an idea of changes for CPython, I made a couple of quick test builds
+            for 3.24 and 24.0.
+          </p>
+
+          <p>3.24 seems pretty straightforward, very similar to a 3.14 bump.</p>
+
+          <p>
+            I needed to update some deprecations to point to their new planned removal
+            versions.
+          </p>
+
+          <p>
+            And the
+            <a href="https://github.com/hugovk/cpython/actions/runs/8684017098"
+              >CI passed</a
+            >.
+          </p>
+
+          <p>
+            For 24.0 there are at least four places that assume the major version is 3.
+          </p>
+
+          <p>
+            I quickly hacked these out, commented out some related tests, and the rest
+            <a href="https://github.com/hugovk/cpython/actions/runs/8870240716"
+              >mostly passed</a
+            >
+            (except one test on Windows).
+          </p>
+
+          <p>Well, more work would be needed.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.022.jpg" alt="Image of slide number 22" />
+        </div>
+        <div class="slide-notes">
+          <p>Of course, the big question is packaging.</p>
+
+          <p>
+            The major and minor versions are joined together <i>without a dot</i> to use
+            as tags in wheel filenames.
+          </p>
+
+          <p>
+            During the 3.10 alpha, there was ambiguity because 3-1-0 can be interpreted
+            as 3.10, 31.0, or 310.
+          </p>
+
+          <p>
+            The
+            <a
+              href="https://packaging.python.org/en/latest/specifications/platform-compatibility-tags/"
+              >spec</a
+            >
+            says an underscore <i>can be used</i> if needed and
+            <a href="https://peps.python.org/pep-0641/">PEP 641</a> proposed this, as in
+            3_10, and this approach could be used for options 2 and 3.
+          </p>
+
+          <p>
+            At the time, it was rejected because it was unknown what side effects there
+            would be on code we’re not aware of.
+          </p>
+
+          <p>
+            And I think it was also rejected because we were half way through the 3.10
+            alpha, the clock was ticking, and we needed a decision.
+          </p>
+
+          <p>So maybe we’d need to redo this PEP.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.023.jpg" alt="Image of slide number 23" />
+        </div>
+        <div class="slide-notes">
+          <p>Will changing the major version to double digits break code?</p>
+
+          <p>
+            Yes, changing the version in any new way always does because people make
+            assumptions.
+          </p>
+
+          <p>
+            For example, that it’s always made up of single digits, or always begins
+            with 3.
+          </p>
+
+          <p>The last one here is most relevant for options 2 and 3.</p>
+
+          <p>
+            So the first option is the safest, because the shape of the version doesn’t
+            change.
+          </p>
+
+          <p>These examples are all from real code, I can name names later.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.024.jpg" alt="Image of slide number 24" />
+        </div>
+        <div class="slide-notes">
+          <p>
+            If we do go for any of these options, these
+            <a href="https://docs.astral.sh/ruff/rules/#flake8-2020-ytt">lint</a>
+            <a href="https://pypi.org/project/flake8-2020/">rules</a> help identify the
+            problems on the previous slide.
+          </p>
+
+          <p>I recommend them even if we maintain the status quo.</p>
+
+          <p>
+            We should also give plenty of notice before a change: I suggest not changing
+            the Python version of any branch under development, giving at least one
+            whole version’s notice, if not longer.
+          </p>
+
+          <p>
+            We can make preview builds which only change the version number for early
+            testing, for example like deadsnakes did for 3.10, which was the first
+            version with double minor digits.
+          </p>
+
+          <p>And as always, continue to encourage early testing of alphas.</p>
+        </div>
+      </div>
+
+      <div class="slide slide--bordered">
+        <div class="slide-image">
+          <img src="images/images.025.jpg" alt="Image of slide number 25" />
+        </div>
+        <div class="slide-notes">
+          <p>Here’s a summary, and now I’d like to hear your thoughts. Thank you!</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="credits">
+      Made with <a href="https://keynote-extractor.com">Keynote Extractor</a>.
+    </p>
+  </body>
+</html>
